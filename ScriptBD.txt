@@ -1,0 +1,44 @@
+spring.data.mongodb.host=127.0.0.1
+spring.data.mongodb.port=27017
+spring.data.mongodb.authentication-database=admin
+spring.data.mongodb.username=manuel
+spring.data.mongodb.password=123
+spring.data.mongodb.database=personas
+
+
+use personas;
+db.createCollection("personas");
+
+db.createUser({
+    user: "manuel",
+    pwd: "123",
+    roles: [
+        {
+            role: "userAdminAnyDatabase",
+            db: "admin"
+        },
+        "readWriteAnyDatabase"
+    ],
+});
+
+
+db.personas.insertMany([
+  {
+    "nombre" : "manuel",
+    "documento" : "111111",
+    "edad" : "36",
+	"parentesco" : "hijo"
+  },
+  {
+    "nombre" : "juan",
+    "documento" : "22222",
+    "edad" : "72",
+	"parentesco" : "padre"
+  },
+  {
+    "nombre" : "laura",
+    "documento" : "33333",
+    "edad" : "38",
+	"parentesco" : "hermana"
+  }
+]);
